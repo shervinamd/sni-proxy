@@ -1,0 +1,45 @@
+version: '3'
+services:
+  sni:
+    image: sni-proxy:v1
+    build:
+      context: .
+      dockerfile: sni.Dockerfile
+    container_name: sni
+    environment:
+      # IP of the SNI service
+      - IP=192.168.25.11
+      # IP of the SOCKS5 Proxy server (V2ray Client)
+      - SOCKS_IP=192.168.25.12
+      - SOCKS_PORT=1080
+    volumes:
+      - $PWD/dnsmasq.conf:/etc/dnsmasq.tpl
+      - $PWD/sniproxy.conf:/etc/sniproxy.conf
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    networks:
+      containers:
+        ipv4_address: 192.168.25.11
+    depends_on:
+      - v2ray
+    restart: unless-stopped
+
+  v2ray:
+    image: v2rayc:v1
+    container_name: v2ray
+    build:
+      context: .
+      dockerfile: v2ray.Dockerfile
+    volumes:
+      - $PWD/config.json:/v2ray/config.json
+    dns: 1.1.1.1
+    networks:
+      containers:
+        ipv4_address: 192.168.25.12
+    restart: unless-stopped
+
+networks:
+  containers:
+    external: true
