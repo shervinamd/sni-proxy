@@ -25,3 +25,7 @@ change environment variables in `docker-compose.yml` to your desired values, the
 ```bash
 docker compose up -d
 ```
+
+
+## License
+This project Licensed under [MIT License](LICENSE)
