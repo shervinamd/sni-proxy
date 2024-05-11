@@ -9,6 +9,6 @@ FROM ubuntu:22.04
 COPY --from=extractor /tun2socks-linux-amd64 ./tun2socks
 COPY /entrypoint.sh /entrypoint.sh
 RUN apt update && \
-    apt install -y sniproxy dnsmasq iptables iproute2 && \
+    apt install -y sniproxy dnsmasq iptables iproute2 ca-certificates && \
     chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
