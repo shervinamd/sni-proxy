@@ -1,4 +1,19 @@
 services:
+  dnsproxy:
+    image: dnsproxy:v1
+    container_name: dnsproxy
+    build:
+      context: .
+      dockerfile: dnsproxy.Dockerfile
+    volumes:
+      - $PWD/dnsproxy-config.yaml:/service/config.yaml
+      - $PWD/proxychains.conf:/service/proxychains.conf
+    networks:
+      containers:
+        ipv4_address: 192.168.25.10
+    depends_on:
+      - v2ray
+    restart: always
   sni:
     image: sni-proxy:v1
     build:
@@ -22,7 +37,7 @@ services:
       containers:
         ipv4_address: 192.168.25.11
     depends_on:
-      - v2ray
+      - dnsproxy
     restart: unless-stopped
 
   v2ray:
