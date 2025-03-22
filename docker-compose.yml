@@ -21,7 +21,7 @@ services:
       dockerfile: sni.Dockerfile
     container_name: sni
     environment:
-      # IP of the SNI service
+      # IP of the SNI service (Docker host's IP address)
       - IP=192.168.25.11
       # IP of the SOCKS5 Proxy server (V2ray Client)
       - SOCKS_IP=192.168.25.12
