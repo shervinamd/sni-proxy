@@ -3,9 +3,6 @@
 ## To Build Images
 ```bash
 docker compose build
-# OR
-docker build -t sni-proxy:v1 ./sni.Dockerfile
-docker build -t v2rayc:v1 ./v2ray.Dockerfile
 ```
 
 ## Changes before start
@@ -25,7 +22,7 @@ docker build -t v2rayc:v1 ./v2ray.Dockerfile
 
   
 
-- **Update `IP` and `${SNI_HOST_IP}` environment variables (in the `sni` service section) with your machine's IP address**
+- **Replace `${SNI_HOST_IP}` variable (in the `sni` service section) with your host machine's IP address or define it in `.env` file**
 
 > **Note**: `SOCKS_IP` and `SOCKS_PORT` must match with the V2ray container address and service port
 
