@@ -11,12 +11,25 @@ docker build -t v2rayc:v1 ./v2ray.Dockerfile
 ## Changes before start
 
 - **Update `config.json` with your own configuration**
+
 - **Create a suitable docker network for services**
-- **Update `IP` environment variable (in the `sni` service section) with your machine's IP address**
+
+  ```shell
+  docker network create \
+    --driver=bridge \
+    --subnet=192.168.25.0/24 \
+    --ip-range=192.168.25.0/24 \
+    --gateway=192.168.25.254 \
+    containers
+  ```
+
+  
+
+- **Update `IP` and `${SNI_HOST_IP}` environment variables (in the `sni` service section) with your machine's IP address**
 
 > **Note**: `SOCKS_IP` and `SOCKS_PORT` must match with the V2ray container address and service port
 
-> **Note**: `dnsmasq.conf` file contains Restricted services
+> **Note**: `dnsmasq.conf` file contains Restricted services need to access
 > You can add more if needed
 
 ## Start the service
