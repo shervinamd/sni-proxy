@@ -22,13 +22,18 @@ services:
     container_name: sni
     environment:
       # IP of the SNI service (Docker host's IP address)
-      - IP=192.168.25.11
+      - IP=${SNI_HOST_IP}
       # IP of the SOCKS5 Proxy server (V2ray Client)
       - SOCKS_IP=192.168.25.12
       - SOCKS_PORT=1080
     volumes:
       - $PWD/dnsmasq.conf:/etc/dnsmasq.tpl
       - $PWD/sniproxy.conf:/etc/sniproxy.conf
+    ports:
+      - ${SNI_HOST_IP}:53:53
+      - ${SNI_HOST_IP}:53:53/udp
+      - ${SNI_HOST_IP}:80:80
+      - ${SNI_HOST_IP}:443:443
     cap_add:
       - NET_ADMIN
     devices:
