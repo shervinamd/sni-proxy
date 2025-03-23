@@ -5,4 +5,6 @@ FROM ubuntu:22.04
 RUN apt update && apt install -y proxychains4 ca-certificates && apt autoclean && apt autoremove
 WORKDIR /service
 COPY --from=extractor /linux-amd64/dnsproxy .
-CMD ["/usr/bin/proxychains","-f","/service/proxychains.conf","/service/dnsproxy","--config-path=/service/config.yaml"]
+COPY dnsproxy-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
