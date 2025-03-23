@@ -1,15 +1,37 @@
 # SNI Proxy
 
-## To Build Images
-```bash
-docker compose build
-```
 
-## Changes before start
 
-- **Update `config.json` with your own configuration**
+#### A simple tool to bypass geographic sanctions
 
-- **Create a suitable docker network for services**
+#### As simple as setting up your DNS settings!
+
+
+
+### Requirements:
+
+- **A Linux system with docker installed**
+- **A V2Ray connection**
+
+
+
+### Steps to build the service:
+
+- Clone the project
+
+  ```shell
+  git clone https://github.com/shervinamd/sni-proxy.git
+  ```
+
+- Create a `.env` file and populate it with values corresponding to those in the `docker-compose.yml` file; you can use the `.env.example` file as a reference.
+
+- Build the images
+
+  ```shell
+  docker compose build
+  ```
+
+- Create a suitable network for the project
 
   ```shell
   docker network create \
@@ -17,24 +39,36 @@ docker compose build
     --subnet=192.168.25.0/24 \
     --ip-range=192.168.25.0/24 \
     --gateway=192.168.25.254 \
-    containers
+    sni-net
   ```
 
-  
+  **Note**:  The network name should be match with the one used in `docker-compose.yml`
 
-- **Replace `${SNI_HOST_IP}` variable (in the `sni` service section) with your host machine's IP address or define it in `.env` file**
+- The `dnsmasq.conf` file contains restricted services need to access, feel free to add more if needed
 
-> **Note**: `SOCKS_IP` and `SOCKS_PORT` must match with the V2ray container address and service port
+- After the build process is completed, start the service.
 
-> **Note**: `dnsmasq.conf` file contains Restricted services need to access
-> You can add more if needed
+  ```shell
+  docker compose up -d
+  ```
 
-## Start the service
 
-change environment variables in `docker-compose.yml` to your desired values, then start the services
-```bash
-docker compose up -d
-```
+
+### Environment Variables
+
+There are some environment variables required for the containers to work properly.
+
+`SNI_HOST_IP` The IP address of the Docker host machine, which acts as a proxy for your network clients.
+
+`DNS_PROXY_CONTAINER_IP` The IP address that is considered for the DNSProxy container.
+
+`SNI_CONTAINER_IP` The IP address that is considered for the SNI container.
+
+`V2RAY_CONTAINER_IP` The IP address that is considered for the V2Ray container.
+
+`SOCKS_SERVICE_PORT` The port of the V2Ray service that listens for SOCKS5 connections.
+
+
 
 
 ## License
