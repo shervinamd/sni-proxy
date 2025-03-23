@@ -15,7 +15,8 @@ echo "1 mymark" >> /etc/iproute2/rt_tables
 ip route add default via 192.168.100.1 dev tun0 table mymark
 ip rule add fwmark 1 table mymark
 
-sed "s/{IP}/${IP}/" /etc/dnsmasq.tpl > /etc/dnsmasq.conf
+sed "s/{SNI_HOST_IP}/${SNI_HOST_IP}/; s/{DNS_PROXY_IP}/${DNS_PROXY_IP}/" /etc/dnsmasq.sample > /etc/dnsmasq.conf
+sed "s/{DNS_PROXY_IP}/${DNS_PROXY_IP}/" /etc/sniproxy.sample > /etc/sniproxy.conf
 dnsmasq -khR & \
 sniproxy -c /etc/sniproxy.conf -f & \
 /tun2socks -device tun0 -proxy socks5://${SOCKS_IP}:${SOCKS_PORT}
