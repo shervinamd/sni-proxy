@@ -10,6 +10,14 @@
 
 ![how sni works](./assets/how-it-works.jpg)
 
+### Tutorial Video
+
+##### [SNI Proxy simply explained + deployment - PeerTube](https://tubedu.org/w/eXsUWTDJH4Rjb649GMsZZF)
+
+##### [SNI Proxy simply explained + deployment - YouTube](https://youtu.be/PrF_25lWM1U)
+
+
+
 ### Requirements:
 
 - **A Linux system with docker installed**
@@ -75,3 +83,7 @@ There are some environment variables required for the containers to work properl
 
 ## License
 This project Licensed under [MIT License](LICENSE)
+
+
+
+Made with ❤️ for the community
