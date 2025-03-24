@@ -8,6 +8,8 @@
 
 
 
+![how sni works](./assets/how-it-works.jpg)
+
 ### Requirements:
 
 - **A Linux system with docker installed**
