@@ -19,5 +19,6 @@ upstream:
   #- "1.1.1.1:53"
   #- "https://dns.google/dns-query"
   #- "https://dns.adguard.com/dns-query"
-  - "tcp://1.1.1.1"
+  #- "tcp://1.1.1.1"
+  - "https://cloudflare-dns.com/dns-query"
 timeout: '10s'
