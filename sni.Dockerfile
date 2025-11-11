@@ -1,5 +1,5 @@
 FROM ubuntu:22.04 AS extractor
-ARG T2S=https://github.com/xjasonlyu/tun2socks/releases/download/v2.5.0/tun2socks-linux-amd64.zip
+ARG T2S=https://github.com/xjasonlyu/tun2socks/releases/download/v2.6.0/tun2socks-linux-amd64.zip
 ADD ${T2S} .
 RUN apt update && \
     apt install -y unzip && \
