@@ -1,3 +1,5 @@
+[![Build Docker images](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml/badge.svg)](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml)
+
 # SNI Proxy
 
 
