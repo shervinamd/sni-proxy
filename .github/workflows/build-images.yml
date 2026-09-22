@@ -12,109 +12,109 @@ on:
 
   workflow_dispatch:
 
-  env:
-    IMAGE_NAME: ${{ github.repository }}
+env:
+  IMAGE_NAME: ${{ github.repository }}
 
 
-  jobs:
-    dnsproxy-build:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: read
-        packages: write
+jobs:
+  dnsproxy-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
       
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v6
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-        - name: Log in to GitHub Container Registry
-          uses: docker/login-action@v4.6.0
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Log in to DockerHub Container Registry
-          uses: docker/login-action@v4.6.0
-          with:
-            registry: docker.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to DockerHub Container Registry
+        uses: docker/login-action@v4.6.0
+        with:
+          registry: docker.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-        - name: Build and push DNSProxy image
-          uses: docker/build-push-action@v7.4.0
-          with:
-            context: .
-            file: dnsproxy.Dockerfile
-            push: true
-            tags: |
-              ghcr.io/${{ env.IMAGE_NAME }}/dnsproxy:latest
-              docker.io/${{ env.IMAGE_NAME }}/dnsproxy:latest
+      - name: Build and push DNSProxy image
+        uses: docker/build-push-action@v7.4.0
+        with:
+          context: .
+          file: dnsproxy.Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAME }}/dnsproxy:latest
+            docker.io/${{ env.IMAGE_NAME }}/dnsproxy:latest
 
-    sni-proxy-build:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: read
-        packages: write
+  sni-proxy-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v6
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-        - name: Log in to GitHub Container Registry
-          uses: docker/login-action@v4.6.0
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Log in to DockerHub Container Registry
-          uses: docker/login-action@v4.6.0
-          with:
-            registry: docker.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to DockerHub Container Registry
+        uses: docker/login-action@v4.6.0
+        with:
+          registry: docker.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-        - name: Build and push SNI Proxy image
-          uses: docker/build-push-action@v7.4.0
-          with:
-            context: .
-            file: sni.Dockerfile
-            push: true
-            tags: |
-              ghcr.io/${{ env.IMAGE_NAME }}/sni-proxy:latest
-              docker.io/${{ env.IMAGE_NAME }}/sni-proxy:latest
+      - name: Build and push SNI Proxy image
+        uses: docker/build-push-action@v7.4.0
+        with:
+          context: .
+          file: sni.Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAME }}/sni-proxy:latest
+            docker.io/${{ env.IMAGE_NAME }}/sni-proxy:latest
 
-    xray-build:
-      runs-on: ubuntu-latest
-      permissions:
-        contents: read
-        packages: write
+  xray-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
       
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v6
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
 
-        - name: Log in to GitHub Container Registry
-          uses: docker/login-action@v4.6.0
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         
-        - name: Log in to DockerHub Container Registry
-          uses: docker/login-action@v4.6.0
-          with:
-            registry: docker.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Log in to DockerHub Container Registry
+        uses: docker/login-action@v4.6.0
+        with:
+          registry: docker.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-        - name: Build and push Xray image
-          uses: docker/build-push-action@v7.4.0
-          with:
-            context: .
-            file: xray.Dockerfile
-            push: true
-            tags: |
-              ghcr.io/${{ env.IMAGE_NAME }}/xray:latest
-              docker.io/${{ env.IMAGE_NAME }}/xray:latest
+      - name: Build and push Xray image
+        uses: docker/build-push-action@v7.4.0
+        with:
+          context: .
+          file: xray.Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAME }}/xray:latest
+            docker.io/${{ env.IMAGE_NAME }}/xray:latest
