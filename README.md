@@ -37,10 +37,10 @@
 
 - Create a `.env` file and populate it with values corresponding to those in the `docker-compose.yml` file; you can use the `.env.example` file as a reference.
 
-- Build the images
+- Pull the images first (optional)
 
   ```shell
-  docker compose build
+  docker compose pull
   ```
 
 - Create a suitable network for the project
@@ -81,6 +81,11 @@ There are some environment variables required for the containers to work properl
 `SOCKS_SERVICE_PORT` The port of the V2Ray service that listens for SOCKS5 connections.
 
 
+> [!TIP]
+> If you have any problem to pull images from DockerHub, use GHCR instead:
+> docker pull ghcr.io/shervinamd/sni-proxy/sni-proxy:latest
+> docker pull ghcr.io/shervinamd/sni-proxy/dnsproxy:latest
+> docker pull ghcr.io/shervinamd/sni-proxy/xray:latest
 
 
 ## License
