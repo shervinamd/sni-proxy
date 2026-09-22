@@ -9,6 +9,7 @@ on:
       - "sni-entrypoint.sh"
       - "sni.Dockerfile"
       - "xray.Dockerfile"
+      - ".github/workflows/*.yml"
 
   workflow_dispatch:
 
