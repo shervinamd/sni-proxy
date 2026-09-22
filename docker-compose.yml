@@ -1,14 +1,14 @@
 name: sni-proxy
 services:
   dnsproxy:
-    image: dnsproxy:v1
+    image: shervinamd/dnsproxy:latest
     container_name: dnsproxy
-    build:
-      context: .
-      dockerfile: dnsproxy.Dockerfile
+    #build:
+      #context: .
+      #dockerfile: dnsproxy.Dockerfile
     environment:
-      # IP and port of the SOCKS5 Proxy server (V2ray Client)
-      - SOCKS_IP=${V2RAY_CONTAINER_IP}
+      # IP and port of the SOCKS5 Proxy server (Xray Client)
+      - SOCKS_IP=${XRAY_CONTAINER_IP}
       - SOCKS_PORT=${SOCKS_SERVICE_PORT}
     volumes:
       - $PWD/dnsproxy-config.yaml:/service/config.yaml
@@ -25,21 +25,21 @@ services:
       sninet:
         ipv4_address: ${DNS_PROXY_CONTAINER_IP}
     depends_on:
-      - v2ray
+      - xray
     restart: always
   sni:
-    image: sni-proxy:v1
-    build:
-      context: .
-      dockerfile: sni.Dockerfile
+    image: shervinamd/sni-proxy:latest
+    #build:
+      #context: .
+      #dockerfile: sni.Dockerfile
     container_name: sni
     environment:
       # IP of the SNI service (Docker host's IP address)
       - SNI_HOST_IP=${SNI_HOST_IP}
       # IP of the dnsproxy
       - DNS_PROXY_IP=${DNS_PROXY_CONTAINER_IP}
-      # IP and port of the SOCKS5 Proxy server (V2ray Client)
-      - SOCKS_IP=${V2RAY_CONTAINER_IP}
+      # IP and port of the SOCKS5 Proxy server (Xray Client)
+      - SOCKS_IP=${Xray_CONTAINER_IP}
       - SOCKS_PORT=${SOCKS_SERVICE_PORT}
     volumes:
       - $PWD/dnsmasq.conf:/etc/dnsmasq.sample
@@ -60,18 +60,18 @@ services:
       - dnsproxy
     restart: unless-stopped
 
-  v2ray:
-    image: v2rayc:v1
-    container_name: v2ray
-    build:
-      context: .
-      dockerfile: v2ray.Dockerfile
+  xray:
+    image: shervinamd/xray:latest
+    container_name: xray
+    #build:
+      #context: .
+      #dockerfile: xray.Dockerfile
     volumes:
-      - $PWD/config.json:/v2ray/config.json
+      - $PWD/config.json:/etc/xray/config.json
     dns: 1.1.1.1
     networks:
       sninet:
-        ipv4_address: ${V2RAY_CONTAINER_IP}
+        ipv4_address: ${XRAY_CONTAINER_IP}
     restart: unless-stopped
 
 networks:
