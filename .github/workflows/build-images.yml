@@ -98,6 +98,9 @@ jobs:
 
       - name: Get the latest Xray version
         id: get-xray-version
+        env:
+          OWNER: "XTLS"
+          REPO: "Xray-core"
         run: |
           LATEST_RELEASE="$(
             curl -fsSL \
