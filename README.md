@@ -82,10 +82,10 @@ There are some environment variables required for the containers to work properl
 
 
 > [!TIP]
-> If you have any problem to pull images from DockerHub, use GHCR instead:
-> docker pull ghcr.io/shervinamd/sni-proxy/sni-proxy:latest
-> docker pull ghcr.io/shervinamd/sni-proxy/dnsproxy:latest
-> docker pull ghcr.io/shervinamd/sni-proxy/xray:latest
+> If you have any problem to pull images from DockerHub, use GHCR instead:  
+> - `ghcr.io/shervinamd/sni-proxy/sni-proxy:latest`  
+> - `ghcr.io/shervinamd/sni-proxy/dnsproxy:latest`  
+> - `ghcr.io/shervinamd/sni-proxy/xray:latest`  
 
 
 ## License
