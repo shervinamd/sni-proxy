@@ -109,7 +109,7 @@ jobs:
               jq -r '.tag_name'
           )"
           [[ -n "$LATEST_RELEASE" ]] || (echo "LATEST_RELEASE variable is empty" && exit 1)
-          echo "LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
+          echo "XRAY_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v4.6.0
@@ -135,4 +135,4 @@ jobs:
             ghcr.io/${{ env.IMAGE_NAME }}/xray:latest
             docker.io/shervinamd/xray:latest
           build-args: |
-            XRAY_VERSION=${{ env.LATEST_RELEASE }}
+            XRAY_VERSION=${{ env.XRAY_LATEST_RELEASE }}
