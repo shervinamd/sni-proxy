@@ -43,7 +43,7 @@ jobs:
           [[ -n "$LATEST_RELEASE" ]] || (echo "LATEST_RELEASE variable is empty" && exit 1)
           echo "TUN2SOCKS_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
 
-        - name: Get the latest dnsproxy version
+      - name: Get the latest dnsproxy version
         id: get-dnsproxy-version
         env:
           OWNER: "AdguardTeam"
