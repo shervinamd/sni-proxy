@@ -80,9 +80,12 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}/dnsproxy:latest
+            ghcr.io/${{ env.IMAGE_NAME }}/dnsproxy:${{ env.DNSPROXY_LATEST_RELEASE }}
             docker.io/shervinamd/dnsproxy:latest
+            docker.io/shervinamd/dnsproxy:${{ env.DNSPROXY_LATEST_RELEASE }}
           build-args: |
             TUN2SOCKS_VERSION=${{ env.TUN2SOCKS_LATEST_RELEASE }}
+            DNSPROXY_VERSION=${{ env.DNSPROXY_LATEST_RELEASE }}
 
   sni-proxy-build:
     runs-on: ubuntu-latest
@@ -93,6 +96,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
+      - name: Get the latest sniproxy version
+        id: get-snip-version
+        run: |
+          LATEST_RELEASE="$(git tag --sort=-version:refname | head -n 1 | cut -c 2-
+          )"
+          echo "SNIPROXY_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
 
       - name: Get the latest TUN2Socks version
         id: get-tunsocks-version
@@ -131,7 +141,9 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}/sni-proxy:latest
+            ghcr.io/${{ env.IMAGE_NAME }}/sni-proxy:${{ env.SNIPROXY_LATEST_RELEASE }}
             docker.io/shervinamd/sni-proxy:latest
+            docker.io/shervinamd/sni-proxy:${{ env.SNIPROXY_LATEST_RELEASE }}
           build-args: |
             TUN2SOCKS_VERSION=${{ env.TUN2SOCKS_LATEST_RELEASE }}
 
@@ -182,6 +194,8 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}/xray:latest
+            ghcr.io/${{ env.IMAGE_NAME }}/xray:${{ env.XRAY_LATEST_RELEASE }}
             docker.io/shervinamd/xray:latest
+            docker.io/shervinamd/xray:${{ env.XRAY_LATEST_RELEASE }}
           build-args: |
             XRAY_VERSION=${{ env.XRAY_LATEST_RELEASE }}
