@@ -28,6 +28,36 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Get the latest TUN2Socks version
+        id: get-tunsocks-version
+        env:
+          OWNER: "xjasonlyu"
+          REPO: "tun2socks"
+        run: |
+          LATEST_RELEASE="$(
+            curl -fsSL \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$OWNER/$REPO/releases/latest" |
+              jq -r '.tag_name'
+          )"
+          [[ -n "$LATEST_RELEASE" ]] || (echo "LATEST_RELEASE variable is empty" && exit 1)
+          echo "TUN2SOCKS_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
+
+        - name: Get the latest dnsproxy version
+        id: get-dnsproxy-version
+        env:
+          OWNER: "AdguardTeam"
+          REPO: "dnsproxy"
+        run: |
+          LATEST_RELEASE="$(
+            curl -fsSL \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$OWNER/$REPO/releases/latest" |
+              jq -r '.tag_name'
+          )"
+          [[ -n "$LATEST_RELEASE" ]] || (echo "LATEST_RELEASE variable is empty" && exit 1)
+          echo "DNSPROXY_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v4.6.0
         with:
@@ -51,6 +81,8 @@ jobs:
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}/dnsproxy:latest
             docker.io/shervinamd/dnsproxy:latest
+          build-args: |
+            TUN2SOCKS_VERSION=${{ env.TUN2SOCKS_LATEST_RELEASE }}
 
   sni-proxy-build:
     runs-on: ubuntu-latest
@@ -61,6 +93,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
+      - name: Get the latest TUN2Socks version
+        id: get-tunsocks-version
+        env:
+          OWNER: "xjasonlyu"
+          REPO: "tun2socks"
+        run: |
+          LATEST_RELEASE="$(
+            curl -fsSL \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$OWNER/$REPO/releases/latest" |
+              jq -r '.tag_name'
+          )"
+          [[ -n "$LATEST_RELEASE" ]] || (echo "LATEST_RELEASE variable is empty" && exit 1)
+          echo "TUN2SOCKS_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v4.6.0
@@ -85,6 +132,8 @@ jobs:
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}/sni-proxy:latest
             docker.io/shervinamd/sni-proxy:latest
+          build-args: |
+            TUN2SOCKS_VERSION=${{ env.TUN2SOCKS_LATEST_RELEASE }}
 
   xray-build:
     runs-on: ubuntu-latest
