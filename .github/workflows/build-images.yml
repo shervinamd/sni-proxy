@@ -99,9 +99,17 @@ jobs:
 
       - name: Get the latest sniproxy version
         id: get-snip-version
+        env:
+          OWNER: "shervinamd"
+          REPO: "sni-proxy"
         run: |
-          LATEST_RELEASE="$(git tag --sort=-version:refname | head -n 1 | cut -c 2-
+          LATEST_RELEASE="$(
+            curl -fsSL \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/$OWNER/$REPO/releases/latest" |
+              jq -r '.tag_name'
           )"
+          [[ -n "$LATEST_RELEASE" ]] || (echo "LATEST_RELEASE variable is empty" && exit 1)
           echo "SNIPROXY_LATEST_RELEASE=$LATEST_RELEASE" >> "$GITHUB_ENV"
 
       - name: Get the latest TUN2Socks version
