@@ -16,4 +16,4 @@ ip route add default via 192.168.100.1 dev tun0 table mymark
 ip rule add fwmark 1 table mymark
 
 /service/dnsproxy --config-path=/service/config.yaml & \ 
-/service/tun2socks -device tun0 -proxy socks5://${SOCKS_IP}:${SOCKS_PORT}
+/service/tun2socks --device tun0 --proxy socks5://${SOCKS_IP}:${SOCKS_PORT}

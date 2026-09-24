@@ -19,4 +19,4 @@ sed "s/{SNI_HOST_IP}/${SNI_HOST_IP}/; s/{DNS_PROXY_IP}/${DNS_PROXY_IP}/" /etc/dn
 sed "s/{DNS_PROXY_IP}/${DNS_PROXY_IP}/" /etc/sniproxy.sample > /etc/sniproxy.conf
 dnsmasq -khR & \
 sniproxy -c /etc/sniproxy.conf -f & \
-/tun2socks -device tun0 -proxy socks5://${SOCKS_IP}:${SOCKS_PORT}
+/tun2socks --device tun0 --proxy socks5://${SOCKS_IP}:${SOCKS_PORT}
