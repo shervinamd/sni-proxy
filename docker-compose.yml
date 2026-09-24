@@ -1,7 +1,8 @@
 name: sni-proxy
 services:
   dnsproxy:
-    image: shervinamd/dnsproxy:latest
+    image: shervinamd/dnsproxy:${DNSPROXY_IMAGE_VERSION}
+    #image: ghcr.io/shervinamd/sni-proxy/dnsproxy:${DNSPROXY_IMAGE_VERSION}
     container_name: dnsproxy
     #build:
       #context: .
@@ -28,7 +29,8 @@ services:
       - xray
     restart: always
   sni:
-    image: shervinamd/sni-proxy:latest
+    image: shervinamd/sni-proxy:${SNI_IMAGE_VERSION}
+    #image: ghcr.io/shervinamd/sni-proxy/sni-proxy:${SNI_IMAGE_VERSION}
     #build:
       #context: .
       #dockerfile: sni.Dockerfile
@@ -61,7 +63,8 @@ services:
     restart: unless-stopped
 
   xray:
-    image: shervinamd/xray:latest
+    image: shervinamd/xray:${XRAY_IMAGE_VERSION}
+    #image: ghcr.io/shervinamd/sni-proxy/xray:${XRAY_IMAGE_VERSION}
     container_name: xray
     #build:
       #context: .
