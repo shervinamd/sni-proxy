@@ -1,13 +1,13 @@
 name: sni-proxy
 services:
   dnsproxy:
-    image: shervinamd/dnsproxy:${DNSPROXY_IMAGE_VERSION}
-    #image: ghcr.io/shervinamd/sni-proxy/dnsproxy:${DNSPROXY_IMAGE_VERSION}
+    image: ${DNSPROXY_IMAGE_NAME}:${DNSPROXY_IMAGE_VERSION}
     container_name: dnsproxy
     #build:
       #context: .
       #dockerfile: dnsproxy.Dockerfile
     environment:
+      # Only change these values in the .env file if you know what you are doing
       # IP and port of the SOCKS5 Proxy server (Xray Client)
       - SOCKS_IP=${XRAY_CONTAINER_IP}
       - SOCKS_PORT=${SOCKS_SERVICE_PORT}
@@ -29,13 +29,13 @@ services:
       - xray
     restart: always
   sni:
-    image: shervinamd/sni-proxy:${SNI_IMAGE_VERSION}
-    #image: ghcr.io/shervinamd/sni-proxy/sni-proxy:${SNI_IMAGE_VERSION}
+    image: ${SNI_IMAGE_NAME}:${SNI_IMAGE_VERSION}
     #build:
       #context: .
       #dockerfile: sni.Dockerfile
     container_name: sni
     environment:
+      # Only change these values in the .env file if you know what you are doing
       # IP of the SNI service (Docker host's IP address)
       - SNI_HOST_IP=${SNI_HOST_IP}
       # IP of the dnsproxy
@@ -63,8 +63,7 @@ services:
     restart: unless-stopped
 
   xray:
-    image: shervinamd/xray:${XRAY_IMAGE_VERSION}
-    #image: ghcr.io/shervinamd/sni-proxy/xray:${XRAY_IMAGE_VERSION}
+    image: ${XRAY_IMAGE_NAME}:${XRAY_IMAGE_VERSION}
     container_name: xray
     #build:
       #context: .
