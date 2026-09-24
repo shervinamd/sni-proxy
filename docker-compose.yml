@@ -39,7 +39,7 @@ services:
       # IP of the dnsproxy
       - DNS_PROXY_IP=${DNS_PROXY_CONTAINER_IP}
       # IP and port of the SOCKS5 Proxy server (Xray Client)
-      - SOCKS_IP=${Xray_CONTAINER_IP}
+      - SOCKS_IP=${XRAY_CONTAINER_IP}
       - SOCKS_PORT=${SOCKS_SERVICE_PORT}
     volumes:
       - $PWD/dnsmasq.conf:/etc/dnsmasq.sample
