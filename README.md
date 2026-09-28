@@ -106,27 +106,19 @@ As simple as changing your DNS settings.
 
 There are some environment variables required for the containers to work properly.
 
-- `SNI_IMAGE_NAME` The image name of the SNI Proxy service. (defined in `.env` file)
-
-- `SNI_IMAGE_VERSION` The image tag of the SNI Proxy service.
-
-- `DNSPROXY_IMAGE_NAME` The image name of the DNS Proxy service. (defined in `.env` file)
-
-- `DNSPROXY_IMAGE_VERSION` The image tag of the DNS Proxy service.
-
-- `XRAY_IMAGE_NAME` The image name of the Xray service. (defined in `.env` file)
-
-- `XRAY_IMAGE_VERSION` The image tag of the Xray service.
-
-- `SNI_HOST_IP` The IP address of the Docker host. Network clients use this address as their DNS server.
-
-- `DNS_PROXY_CONTAINER_IP` The IP address assigned to the DNS Proxy container.
-
-- `SNI_CONTAINER_IP` The IP address assigned to the SNI Proxy container.
-
-- `XRAY_CONTAINER_IP` The IP address assigned to the Xray container.
-
-- `SOCKS_SERVICE_PORT` The port on which the Xray service listens for SOCKS5 connections.
+| Variable | Description | Example |
+| --- | --- | --- |
+| `SNI_IMAGE_NAME` | The image name of the SNI Proxy service. | `shervinamd/sni-proxy` or<br>`ghcr.io/shervinamd/sni-proxy/sni-proxy` |
+| `SNI_IMAGE_VERSION` | The image tag of the SNI Proxy service | `v1.4.1` |
+| `DNSPROXY_IMAGE_NAME` | The image name of the DNS Proxy service. | `shervinamd/dnsproxy` or<br> `ghcr.io/shervinamd/sni-proxy/dnsproxy` |
+| `DNSPROXY_IMAGE_VERSION` | The image tag of the DNS Proxy service. | `v0.84.2` |
+| `XRAY_IMAGE_NAME` | The image name of the Xray service. | `shervinamd/xray` or<br> `ghcr.io/shervinamd/sni-proxy/xray` |
+| `XRAY_IMAGE_VERSION` | The image tag of the Xray service. | `v26.3.27` |
+| `SNI_HOST_IP` | The IP address of the Docker host. Network clients use this address as their DNS server. | `192.168.1.10` |
+| `DNS_PROXY_CONTAINER_IP` | The IP address assigned to the DNS Proxy container. | `192.168.25.11` |
+| `SNI_CONTAINER_IP` | The IP address assigned to the SNI Proxy container. | `192.168.25.10` |
+| `XRAY_CONTAINER_IP` | The IP address assigned to the Xray container. | `192.168.25.12` |
+| `SOCKS_SERVICE_PORT` | The port on which the Xray service listens for SOCKS5 connections. | `1080` |
 
 ### Host and Container IP Addresses
 
