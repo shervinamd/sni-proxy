@@ -109,7 +109,7 @@ There are some environment variables required for the containers to work properl
 | Variable | Description | Example |
 | --- | --- | --- |
 | `SNI_IMAGE_NAME` | The image name of the SNI Proxy service. | `shervinamd/sni-proxy` or<br>`ghcr.io/shervinamd/sni-proxy/sni-proxy` |
-| `SNI_IMAGE_VERSION` | The image tag of the SNI Proxy service | `v1.4.1` |
+| `SNI_IMAGE_VERSION` | The image tag of the SNI Proxy service | `v1.5.0` |
 | `DNSPROXY_IMAGE_NAME` | The image name of the DNS Proxy service. | `shervinamd/dnsproxy` or<br> `ghcr.io/shervinamd/sni-proxy/dnsproxy` |
 | `DNSPROXY_IMAGE_VERSION` | The image tag of the DNS Proxy service. | `v0.84.2` |
 | `XRAY_IMAGE_NAME` | The image name of the Xray service. | `shervinamd/xray` or<br> `ghcr.io/shervinamd/sni-proxy/xray` |
