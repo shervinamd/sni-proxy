@@ -10,6 +10,8 @@ on:
       - "sni.Dockerfile"
       - "xray.Dockerfile"
       - ".github/workflows/build-images.yml"
+    tags:
+      - "v*"
 
   workflow_dispatch:
 
