@@ -1,4 +1,4 @@
-[![Build Docker images](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml/badge.svg)](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml)
+[![GitHub release](https://img.shields.io/github/v/release/shervinamd/sni-proxy)](https://github.com/shervinamd/sni-proxy/releases/latest) [![Build Docker images](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml/badge.svg)](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml)
 
 # SNI Proxy
 
