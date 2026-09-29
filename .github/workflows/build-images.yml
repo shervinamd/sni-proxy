@@ -12,8 +12,8 @@ on:
       - ".github/workflows/build-images.yml"
     tags:
       - "v*"
-    release:
-      types: [published]
+  release:
+    types: [published]
 
   workflow_dispatch:
 
