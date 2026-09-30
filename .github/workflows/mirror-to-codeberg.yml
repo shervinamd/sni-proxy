@@ -1,0 +1,39 @@
+name: Sync to Codeberg
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the complete repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Add Codeberg remote
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+          CODEBERG_USERNAME: ${{ vars.CODEBERG_USERNAME }}
+          CODEBERG_REPOSITORY: ${{ vars.CODEBERG_REPOSITORY }}
+        run: |
+          git remote add codeberg \
+            "https://${CODEBERG_USERNAME}:${CODEBERG_TOKEN}@codeberg.org/${CODEBERG_USERNAME}/${CODEBERG_REPOSITORY}.git"
+
+      - name: Push exact mirror to Codeberg
+        run: |
+          git push --mirror codeberg
