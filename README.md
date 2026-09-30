@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/v/release/shervinamd/sni-proxy)](https://github.com/shervinamd/sni-proxy/releases/latest) [![Build Docker images](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml/badge.svg)](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml)
+[![GitHub release](https://img.shields.io/github/v/release/shervinamd/sni-proxy)](https://github.com/shervinamd/sni-proxy/releases/latest) [![Build Docker images](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml/badge.svg)](https://github.com/shervinamd/sni-proxy/actions/workflows/build-images.yml) [![Sync to Codeberg](https://github.com/shervinamd/sni-proxy/actions/workflows/mirror-to-codeberg.yml/badge.svg)](https://github.com/shervinamd/sni-proxy/actions/workflows/mirror-to-codeberg.yml)
 
 # SNI Proxy
 
